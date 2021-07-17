@@ -1,0 +1,25 @@
+{
+  "name": "employeSQL",
+  "version": "1.0.0",
+  "description": "## Description This is a simple employee management system that utilizes Node.js and MySQL to allow a user tha ability to create and edit a team of employees.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmunoz94/employeSQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmunoz94/employeSQL/issues"
+  },
+  "homepage": "https://github.com/gmunoz94/employeSQL#readme",
+  "dependencies": {
+    "inquirer": "^8.1.2",
+    "mysql": "^2.18.1"
+  }
+}
