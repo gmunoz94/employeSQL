@@ -58,7 +58,7 @@ const init = () => {
                     remEmp();
                     break;
                 case 'Update Employee Role':
-                    updateEmp();
+                    updateEmpRole();
                     break;
                 case 'Update Employee Manager':
                     updateEmpMan();
@@ -98,6 +98,28 @@ const empView = () => {
     })
 }
 
+const empDepView = () => {
+    console.log('Viewing Employees by Department...\n');
+    connection.query(`SELECT * FROM employee
+    GROUP BY role_id
+    ORDER BY role_id DESC;`, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        init();
+    })
+}
+
+const empManView = () => {
+    console.log('Viewing Employees by Manager...\n');
+    connection.query(`SELECT * FROM employee
+    GROUP BY manager_id
+    ORDER BY manager_id DESC;`, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        init();
+    })
+}
+
 const depView = () => {
     console.log('Viewing Departments...\n');
     connection.query('SELECT * FROM department', (err, res) => {
@@ -108,7 +130,7 @@ const depView = () => {
 }
 
 const roleView = () => {
-    console.log('Viewing Departments...\n');
+    console.log('Viewing Roles...\n');
     connection.query('SELECT * FROM role', (err, res) => {
         if (err) throw err;
         console.table(res);
@@ -131,16 +153,17 @@ const addDep = () => {
             VALUES('${response.depName}');`, (err, res) => {
                 if (err) throw err;
                 console.log(res);
+                init();
     });
     })
 }
 
 const addRole = () => {
-    depts = [];
+    let depts = [];
     connection.query(`select * from department`, (err, res) => {
+        console.log(res);
         for (let i = 0; i < res.length; i++) {
-            console.log(res);
-            depts.push(res[i].name);
+            depts.push(res[i]);
         }
     })
 
@@ -164,11 +187,13 @@ const addRole = () => {
             }
         ])
         .then ((response) => {
-            console.log('Adding Department...\n');
-            connection.query(`INSERT INTO role(name)
-            VALUES('${response.depName}');`, (err, res) => {
+            console.log('Adding Position...\n');
+            console.log(`${response.roleDepName}`);
+            connection.query(`INSERT INTO role(title, salary, department_id)
+            VALUES ('${response.roleName}', '${response.salary}', (SELECT id from department WHERE name='${response.roleDepName.id}'));`, (err, res) => {
                 if (err) throw err;
                 console.log(res);
+                init();
     });
     })
 }
