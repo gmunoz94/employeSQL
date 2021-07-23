@@ -27,3 +27,5 @@ This is a simple employee management system that utilizes Node.js and MySQL to a
 GitHub: [gmunoz94](https://github.com/gmunoz94)
 Email: [gmunoz9619@gmail.com](mailto:gmunoz9619@gmail.com)
     
+## Links
+[Video](https://youtu.be/9pvCnMLuKqU)
